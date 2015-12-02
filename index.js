@@ -20,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended : true }))
 app.use(errHandler)
 app.use(formatter)
 app.use(logger)
-app.set('port', (process.env.PORT || 80));
+app.set('port', (process.env.PORT || 3000));
 
 /**
  * Configure the app routes
