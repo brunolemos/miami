@@ -43,7 +43,18 @@ var UserToken = sequelize.define('userToken', {
  */
 var UserMedicine = sequelize.define('userMedicine', {
   userId      : { type : Sequelize.INTEGER },
-  medicineId  : { type : Sequelize.INTEGER  }
+  medicineId  : { type : Sequelize.INTEGER  },
+  count       : { type : Sequelize.INTEGER  }
+})
+
+/**
+ * The user prescription model
+ */
+var UserPrescription = sequelize.define('userPrescription', {
+  userMedicineId  : { type : Sequelize.INTEGER },
+  weekDay         : { type : Sequelize.INTEGER  },
+  dayTime         : { type : Sequelize.INTEGER  },
+  count           : { type : Sequelize.INTEGER  }
 })
 
 /**
@@ -51,6 +62,7 @@ var UserMedicine = sequelize.define('userMedicine', {
  */
 User.hasMany(UserToken)
 User.hasMany(UserMedicine)
+User.hasMany(UserPrescription)
 
 /**
  * Creates the relationship
@@ -58,6 +70,7 @@ User.hasMany(UserMedicine)
 UserToken.belongsTo(User)
 UserMedicine.belongsTo(User)
 UserMedicine.belongsTo(Medicine)
+UserPrescription.belongsTo(User)
 
 /**
  * Attributes
@@ -65,10 +78,12 @@ UserMedicine.belongsTo(Medicine)
 User.attr = {}/* all */
 UserToken.attr = {}
 UserMedicine.attr = {}
+UserPrescription.attr = {}
 
 // Associates UserToken with User
 User.Token = UserToken
-User.Medicine = UserMedicine
+User.Medicines = UserMedicine
+User.Prescriptions = UserPrescription
 
 /**
  * Associates an authenticator

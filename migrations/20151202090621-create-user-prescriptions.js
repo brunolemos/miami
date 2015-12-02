@@ -2,29 +2,33 @@
 
 module.exports = {
   up: function (queryInterface, Sequelize) {
-    queryInterface.createTable('userMedicines',
+    queryInterface.createTable('userPrescriptions',
       {
         id : {
           type          : Sequelize.INTEGER,
           primaryKey    : true,
           autoIncrement : true
         },
-        userId : {
+        userMedicineId : {
           type       : Sequelize.INTEGER,
           references : {
-            model : 'users',
+            model : 'userMedicines',
             key   : 'id'
           }
         },
-        medicineId : {
-          type       : Sequelize.INTEGER,
-          references : {
-            model : 'medicines',
-            key   : 'id'
-          }
+        weekDay : {
+          type      : Sequelize.INTEGER,
+          allowNull : false
+        },
+        dayTime : {
+          type      : Sequelize.INTEGER,
+          allowNull : false
         },
         count : {
           type : Sequelize.INTEGER
+        },
+        repeatUntil : {
+          type : Sequelize.DATE
         },
         createdAt : {
           type : Sequelize.DATE
@@ -37,6 +41,6 @@ module.exports = {
   },
 
   down: function (queryInterface, Sequelize) {
-    queryInterface.dropTable('userMedicines')
+    queryInterface.dropTable('userPrescriptions')
   }
 }
