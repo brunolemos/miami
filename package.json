@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/brunolemos/miami/issues"
   },
-  "homepage": "https://github.com/brunolemos/miami#readme"
+  "homepage": "https://github.com/brunolemos/miami#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "co-express": "^1.2.1",
+    "express": "^4.13.3",
+    "fs": "0.0.2"
+  }
 }
