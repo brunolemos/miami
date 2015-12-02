@@ -1,9 +1,12 @@
 'use strict'
 
+// Loads environment variables
+require('dotenv').load()
+
 var express     = require('express')
-  , bodyParser  = require('body-parser')
-  , app         = express()
-  , router      = express.Router()
+var bodyParser  = require('body-parser')
+var app         = express()
+var router      = express.Router()
 
 var routes      = require('./routes/main')(router)
 
