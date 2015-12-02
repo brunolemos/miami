@@ -20,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended : true }))
 app.use(errHandler)
 app.use(formatter)
 app.use(logger)
+app.set('port', (process.env.PORT || 80));
 
 /**
  * Configure the app routes
@@ -28,7 +29,7 @@ app.use('/', router)
 
 // START THE SERVER
 // =============================================================================
-var server = app.listen(3000, () => {
+var server = app.listen(app.get('port'), () => {
   var host = server.address().address.replace(/::$/, 'localhost')
   var port = server.address().port
 
