@@ -25,6 +25,23 @@ Medicine.attr = {
 }
 
 /**
+ * Creates a medicine from an object
+ */
+Medicine.createFromObject = g(function*(medicine) {
+  // Checks if medicine exists on database
+  var _medicine = yield Medicine.findOne({
+    attributes : Medicine.attr,
+    where      : {
+      name     : medicine.name
+    }
+  })
+
+  if (_medicine) return _medicine.dataValues
+
+  return (yield Medicine.create(medicine)).dataValues;
+})
+
+/**
   * Expose models/medicine
   */
 exports = module.exports = Medicine

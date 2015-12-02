@@ -19,13 +19,7 @@ var User = require('../models/user')
  * @param express.Router router
  */
 exports = module.exports = (router) => {
-  let root = '/users'
-
-  router.route(root + '/me')
-    .get(User.authenticator, me)
-
-  router.route(root + '/auth')
-    .get(auth)
+  router.route('/auth/facebook').get(facebookAuth)
 }
 
 /**
@@ -39,7 +33,7 @@ var me = g(function* (req, res, next) {
  * Authenticates an user from its FB token
  * @query fb_token The facebook token
  */
-var auth = g(function* (req, res, next) {
+var facebookAuth = g(function* (req, res, next) {
   let fbToken = req.query.fb_token
 
   // Gets the user from facebook

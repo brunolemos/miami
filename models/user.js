@@ -89,8 +89,7 @@ User.Prescriptions = UserPrescription
  * Associates an authenticator
  */
 User.authenticator = g(function* (req, res, next) {
-  var accessToken = req.query.access_token || null
-  accessToken = accessToken.replace(/ /g, '+')
+  var accessToken = req.query.access_token ? req.query.access_token.replace(/ /g, '+') : null
 
   var userToken = yield User.Token.findOne({
     attributes : User.Token.attr,
@@ -108,6 +107,28 @@ User.authenticator = g(function* (req, res, next) {
     next()
   }
 
+})
+
+/**
+ * Creates a user medicine from an object
+ */
+UserMedicine.createFromObject = g(function*(userMedicine) {
+  if(!userMedicine.medicineId && userMedicine.name) {
+    var medicine = yield Medicine.createFromObject(userMedicine)
+    userMedicine.medicineId = medicine.id
+  }
+
+  // Checks if medicine exists on database
+  var _userMedicine = yield UserMedicine.findOne({
+    attributes : UserMedicine.attr,
+    where      : {
+      id       : userMedicine.id
+    }
+  })
+
+  if (_userMedicine) return _userMedicine.dataValues
+
+  return (yield UserMedicine.create(userMedicine)).dataValues;
 })
 
 /**

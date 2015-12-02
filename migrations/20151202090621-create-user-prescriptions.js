@@ -14,7 +14,8 @@ module.exports = {
           references : {
             model : 'userMedicines',
             key   : 'id'
-          }
+          },
+          allowNull : false
         },
         weekDay : {
           type      : Sequelize.INTEGER,

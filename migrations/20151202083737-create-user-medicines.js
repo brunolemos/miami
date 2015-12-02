@@ -14,14 +14,16 @@ module.exports = {
           references : {
             model : 'users',
             key   : 'id'
-          }
+          },
+          allowNull : false
         },
         medicineId : {
           type       : Sequelize.INTEGER,
           references : {
             model : 'medicines',
             key   : 'id'
-          }
+          },
+          allowNull : false
         },
         count : {
           type : Sequelize.INTEGER
