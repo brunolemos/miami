@@ -32,11 +32,15 @@ var me = g(function* (req, res, next) {
   res.spit(req.user)
 })
 
-
 /**
  * Update the current user
  */
 var update = g(function* (req, res, next) {
-  console.log(req.params)
-  res.spit(false)
+  delete req.body.access_token
+
+  var user = yield User.update(req.body, {
+    where: { id : req.body.userId }
+  })
+
+  res.spit(user)
 })

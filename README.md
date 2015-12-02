@@ -13,6 +13,11 @@ API Endpoint: https://miami-hackathon.herokuapp.com
   [GET] /user?access_token={ACCESS_TOKEN}
 ````
 
+### Update / Simplify Commerce
+````
+  [GET] /user?name={NAME}&email={EMAIL}&creditCardToken={SIMPLIFY_COMMERCE_TOKEN}&access_token={ACCESS_TOKEN}
+````
+
 ### Medicines
 ````
   [GET] /user/medicines?access_token={ACCESS_TOKEN}

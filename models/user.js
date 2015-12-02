@@ -23,6 +23,7 @@ var User = sequelize.define('user', {
     primaryKey    : true,
     autoIncrement : true
   },
+  creditCardToken : { type : Sequelize.STRING },
   name       : { type : Sequelize.STRING },
   email      : { type : Sequelize.STRING },
   facebookId : { type : Sequelize.STRING },
