@@ -132,6 +132,25 @@ UserMedicine.createFromObject = g(function*(userMedicine) {
 })
 
 /**
+ * Creates a user medicine from an object
+ */
+UserPrescription.createFromObject = g(function*(userPrescription) {
+  // Checks if medicine exists on database
+  var _userPrescription = yield UserPrescription.findOne({
+    attributes : UserPrescription.attr,
+    where      : {
+      userMedicineId : userPrescription.userMedicineId,
+      weekDay        : userPrescription.weekDay,
+      dayTime        : userPrescription.dayTime,
+    }
+  })
+
+  if (_userPrescription) return _userPrescription.dataValues
+
+  return (yield UserPrescription.create(userPrescription)).dataValues;
+})
+
+/**
  * Expose models/user
  */
 exports = module.exports = User

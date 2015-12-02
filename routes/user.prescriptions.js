@@ -7,21 +7,21 @@ var g = require('co-express')
 */
 var User = require('../models/user')
 var Medicine = require('../models/medicine')
-var UserMedicine = User.Medicines
+var UserPrescription = User.Prescriptions
 
 /**
  * Generates the routes
  * @param express.Router router
  */
 module.exports = (router) => {
-  router.route('/user/medicines')
+  router.route('/user/prescriptions')
     .get(User.authenticator, list)
     .post(User.authenticator, create)
 }
 
 var list = g(function* (req, res, next) {
-  var medicines = yield UserMedicine.findAll({
-    attributes : UserMedicine.attr,
+  var medicines = yield UserPrescription.findAll({
+    attributes : UserPrescription.attr,
     include : [ User ],
     where      : {
       userId    : req.user.id
@@ -32,18 +32,13 @@ var list = g(function* (req, res, next) {
 })
 
 var list = g(function* (req, res, next) {
-  var userMedicines = yield UserMedicine.findAll({
-    attributes  : UserMedicine.attr,
-    include : [ Medicine ],
+  var medicines = yield UserPrescription.findAll({
+    attributes  : UserPrescription.attr,
+    include : [ User, Medicine ],
     where       : {
       userId    : req.user.id
     }
   })
-
-  var medicines = []
-  for(var userMedicine of userMedicines) {
-    medicines.push(userMedicine.medicine)
-  }
 
   res.spit(medicines)
 })
@@ -51,6 +46,6 @@ var list = g(function* (req, res, next) {
 var create = g(function* (req, res, next) {
   req.query.userId = req.user.id
 
-  var userMedicine = yield UserMedicine.createFromObject(req.query)
+  var userMedicine = yield UserPrescription.createFromObject(req.query)
   res.spit(userMedicine)
 })

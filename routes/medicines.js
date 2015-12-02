@@ -24,15 +24,7 @@ var list = g(function* (req, res, next) {
     attributes : Medicine.attr,
   })
 
-  res.spit(medicines.dataValues)
-})
-
-var list = g(function* (req, res, next) {
-  var medicines = yield Medicine.findAll({
-    attributes : Medicine.attr
-  })
-
-  res.spit(medicines.dataValues)
+  res.spit(medicines)
 })
 
 var create = g(function* (req, res, next) {
