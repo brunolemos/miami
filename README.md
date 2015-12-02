@@ -1,5 +1,7 @@
 #Docs#
 
+
+
 ##User##
 ###Login###
   [GET] /auth/facebook?fb_token={FACEBOOK_ACCESS_TOKEN}
@@ -11,7 +13,7 @@
   [GET] /user/medicines?access_token={ACCESS_TOKEN}
 
   //This will create a medicine and associate with a user
-  [POST] /user/medicines?name={NAME}&access_token={ACCESS_TOKEN}
+  [POST] /user/medicines?name={NAME}&picture={PICTURE_URL}&access_token={ACCESS_TOKEN}
 
   //This will associate an existent medicine with a user
   [POST] /user/medicines?medicineId={NAME}&access_token={ACCESS_TOKEN}
@@ -28,4 +30,4 @@
   [GET] /medicines
 
   //This will create a medicine but not associate with any user
-  [POST] /medicines?name={NAME}
+  [POST] /medicines?name={NAME}&picture={PICTURE_URL}
