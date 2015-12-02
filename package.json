@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": "5.1.0"
+  },
   "scripts": {
     "postinstall": "sequelize db:migrate",
     "start": "node index.js"
