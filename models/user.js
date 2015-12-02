@@ -5,6 +5,8 @@ var g = require('co-express')
   , Sequelize = require('sequelize')
   , sequelize = require('../config/database')().sequelize
 
+var Medicine = require('./medicine')
+
 /**
  * @apiDefine authentication Access rights needed.
  * A query parameter <code>access_token</code> is required.
@@ -28,7 +30,7 @@ var User = sequelize.define('user', {
 })
 
 /**
- * The user image model
+ * The user token model
  */
 var UserToken = sequelize.define('userToken', {
   userId      : { type : Sequelize.INTEGER },
@@ -37,31 +39,36 @@ var UserToken = sequelize.define('userToken', {
 })
 
 /**
+ * The user medicine model
+ */
+var UserMedicine = sequelize.define('userMedicine', {
+  userId      : { type : Sequelize.INTEGER },
+  medicineId  : { type : Sequelize.INTEGER  }
+})
+
+/**
  * Creates the relationship
  */
 User.hasMany(UserToken)
+User.hasMany(UserMedicine)
 
 /**
  * Creates the relationship
  */
 UserToken.belongsTo(User)
+UserMedicine.belongsTo(User)
+UserMedicine.belongsTo(Medicine)
 
 /**
- * The user attributes
+ * Attributes
  */
-User.attr = {
-  /* all */
-}
-
-/**
- * The userToken attributes
- */
-UserToken.attr = {
-  /* all */
-}
+User.attr = {}/* all */
+UserToken.attr = {}
+UserMedicine.attr = {}
 
 // Associates UserToken with User
 User.Token = UserToken
+User.Medicine = UserMedicine
 
 /**
  * Associates an authenticator
