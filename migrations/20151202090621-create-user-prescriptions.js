@@ -9,6 +9,14 @@ module.exports = {
           primaryKey    : true,
           autoIncrement : true
         },
+        userId : {
+          type       : Sequelize.INTEGER,
+          references : {
+            model : 'users',
+            key   : 'id'
+          },
+          allowNull : false
+        },
         userMedicineId : {
           type       : Sequelize.INTEGER,
           references : {

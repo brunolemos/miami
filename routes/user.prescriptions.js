@@ -7,6 +7,7 @@ var g = require('co-express')
 */
 var User = require('../models/user')
 var Medicine = require('../models/medicine')
+var UserMedicine = User.Medicines
 var UserPrescription = User.Prescriptions
 
 /**
@@ -32,15 +33,15 @@ var list = g(function* (req, res, next) {
 })
 
 var list = g(function* (req, res, next) {
-  var medicines = yield UserPrescription.findAll({
+  var prescriptions = yield UserPrescription.findAll({
     attributes  : UserPrescription.attr,
-    include : [ User, Medicine ],
+    include : [ UserMedicine ],
     where       : {
       userId    : req.user.id
     }
   })
 
-  res.spit(medicines)
+  res.spit(prescriptions)
 })
 
 var create = g(function* (req, res, next) {

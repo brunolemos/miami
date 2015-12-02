@@ -17,6 +17,12 @@
   [POST] /user/medicines?medicineId={NAME}&access_token={ACCESS_TOKEN}
 
 
+##Prescriptions##
+###List###
+  [GET] /user/prescriptions?access_token={ACCESS_TOKEN}
+  [POST] /user/prescriptions?userMedicineId={MEDICINE_ID}&weekDay={WEEK_DAY}&dayTime={DAY_TIME}&repeatUntil={REPEAT_UNTIL_DATE}&access_token={ACCESS_TOKEN}
+
+
 ##Medicines##
 ###List###
   [GET] /medicines

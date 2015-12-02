@@ -51,6 +51,7 @@ var UserMedicine = sequelize.define('userMedicine', {
  * The user prescription model
  */
 var UserPrescription = sequelize.define('userPrescription', {
+  userId          : { type : Sequelize.INTEGER },
   userMedicineId  : { type : Sequelize.INTEGER },
   weekDay         : { type : Sequelize.INTEGER  },
   dayTime         : { type : Sequelize.INTEGER  },
@@ -63,6 +64,7 @@ var UserPrescription = sequelize.define('userPrescription', {
 User.hasMany(UserToken)
 User.hasMany(UserMedicine)
 User.hasMany(UserPrescription)
+UserMedicine.hasMany(UserPrescription)
 
 /**
  * Creates the relationship
@@ -71,6 +73,7 @@ UserToken.belongsTo(User)
 UserMedicine.belongsTo(User)
 UserMedicine.belongsTo(Medicine)
 UserPrescription.belongsTo(User)
+UserPrescription.belongsTo(UserMedicine)
 
 /**
  * Attributes
