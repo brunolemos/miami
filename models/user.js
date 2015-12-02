@@ -67,8 +67,8 @@ User.Token = UserToken
  * Associates an authenticator
  */
 User.authenticator = g(function* (req, res, next) {
-
-  let accessToken = req.query.access_token || null
+  var accessToken = req.query.access_token || null
+  accessToken = accessToken.replace(/ /g, '+')
 
   var userToken = yield User.Token.findOne({
     attributes : User.Token.attr,
@@ -85,7 +85,7 @@ User.authenticator = g(function* (req, res, next) {
 
     next()
   }
-  
+
 })
 
 /**
