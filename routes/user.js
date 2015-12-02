@@ -19,7 +19,10 @@ var User = require('../models/user')
  * @param express.Router router
  */
 exports = module.exports = (router) => {
-  router.route('/user').get(User.authenticator, me)
+  router.route('/user')
+    .get(User.authenticator, me)
+    .post(User.authenticator, update)
+    .put(User.authenticator, update)
 }
 
 /**
@@ -27,4 +30,13 @@ exports = module.exports = (router) => {
  */
 var me = g(function* (req, res, next) {
   res.spit(req.user)
+})
+
+
+/**
+ * Update the current user
+ */
+var update = g(function* (req, res, next) {
+  console.log(req.params)
+  res.spit(false)
 })
